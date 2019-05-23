@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Fusee.Base.Common;
@@ -23,6 +23,9 @@ namespace Fusee.Tutorial.Core
         private TransformComponent _bodyTransform;
         private TransformComponent _upperArmTransform;
         private TransformComponent _foreArmTransform;
+        private TransformComponent _greifhand1Transform;
+        private TransformComponent _greifhand2Transform;
+        private TransformComponent _greifhand3Transform;
 
         SceneContainer CreateScene()
         {
@@ -31,25 +34,43 @@ namespace Fusee.Tutorial.Core
             {
                 Rotation = new float3(0, 0, 0),
                 Scale = new float3(1, 1, 1),
-                Translation = new float3(0, 0, 0)
+                Translation = new float3(0, 0, 0),
             };
             _bodyTransform = new TransformComponent
             {
                 Rotation = new float3(0, 1.2f, 0),
                 Scale = new float3(1, 1, 1),
-                Translation = new float3(0, 6, 0)
+                Translation = new float3(0, 6, 0),
             };
             _upperArmTransform = new TransformComponent
             {
                 Rotation = new float3(0.8f, 0, 0),
                 Scale = new float3(1, 1, 1),
-                Translation = new float3(2, 4, 0)
+                Translation = new float3(2, 4, 0),
             };
             _foreArmTransform = new TransformComponent
             {
                 Rotation = new float3(0.8f, 0, 0),
                 Scale = new float3(1, 1, 1),
-                Translation = new float3(-2, 8, 0)
+                Translation = new float3(-2, 8, 0),
+            };
+            _greifhand1Transform = new TransformComponent
+            {
+                Rotation = new float3(0, 0, 0),
+                Scale = new float3(1, 1, 1),
+                Translation = new float3(0, 1.5f, 0),
+            };
+            _greifhand2Transform = new TransformComponent
+            {
+                Rotation = new float3(0, 0, 0),
+                Scale = new float3(1, 1, 1),
+                Translation = new float3(-4.5f, -1, 0),
+            };
+            _greifhand3Transform = new TransformComponent
+            {
+                Rotation = new float3(0, 0, 0),
+                Scale = new float3(1, 1, 1),
+                Translation = new float3(4.5f, -1, 0),
             };
 
             // Setup the scene graph
@@ -144,17 +165,98 @@ namespace Fusee.Tutorial.Core
                                                     },
                                                     SimpleMeshes.CreateCuboid(new float3(2, 10, 2))
                                                 }
+                                        // Greifhand1
+                                                new SceneNodeContainer {
+                                                            Components = new List < SceneComponentContainer > {
+                                                                    _greifhand1Transform,
+                                                                },
+                                                                Children = new List < SceneNodeContainer > {
+                                                                    new SceneNodeContainer {
+                                                                        Components = new List < SceneComponentContainer > {
+                                                                            new TransformComponent {
+                                                                                Rotation = new float3(0, 0, 0),
+                                                                                    Scale = new float3(1, 1, 1),
+                                                                                    Translation = new float3(0, 4, 0)
+                                                                            },
+                                                                            new MaterialComponent {
+                                                                                Diffuse = new MatChannelContainer {
+                                                                                        Color = new float3(1, 1, 0)
+                                                                                    },
+                                                                                    Specular = new SpecularChannelContainer {
+                                                                                        Color = new float3(1, 1, 1), Shininess = 5 }
+                                                                                    }
+                                                                            },
+                                                                            SimpleMeshes.CreateCuboid(new float3(10, 1, 2))
+                                                                        },
+                                                                         Children = new List < SceneNodeContainer > {
+                                                                         }
+                                            },
+
+                                        //Greifhand2
+                                                            new SceneNodeContainer {
+                                                            Components = new List < SceneComponentContainer > {
+                                                                    _greifhand2Transform,
+                                                                },
+                                                                Children = new List < SceneNodeContainer > {
+                                                                    new SceneNodeContainer {
+                                                                        Components = new List < SceneComponentContainer > {
+                                                                            new TransformComponent {
+                                                                                Rotation = new float3(0, 0, 0),
+                                                                                    Scale = new float3(1, 1, 1),
+                                                                                    Translation = new float3(0, 4, 0)
+                                                                            },
+                                                                            new MaterialComponent {
+                                                                                Diffuse = new MatChannelContainer {
+                                                                                        Color = new float3(1, 0, 1)
+                                                                                    },
+                                                                                    Specular = new SpecularChannelContainer {
+                                                                                        Color = new float3(1, 1, 1), Shininess = 5 }
+                                                                                    }
+                                                                            },
+                                                                            SimpleMeshes.CreateCuboid(new float3(1, 5, 2))
+                                                                    },
+                                                                    
+                                                                      }
+                                                            },
+                                                                
+                               
+                                        //Greifhand3
+                                                            new SceneNodeContainer {
+                                                            Components = new List < SceneComponentContainer > {
+                                                                    _greifhand3Transform,
+                                                                },
+                                                                Children = new List < SceneNodeContainer > {
+                                                                    new SceneNodeContainer {
+                                                                        Components = new List < SceneComponentContainer > {
+                                                                            new TransformComponent {
+                                                                                Rotation = new float3(0, 0, 0),
+                                                                                    Scale = new float3(1, 1, 1),
+                                                                                    Translation = new float3(0, 4, 0)
+                                                                            },
+                                                                            new MaterialComponent {
+                                                                                Diffuse = new MatChannelContainer {
+                                                                                        Color = new float3(1, 0, 1)
+                                                                                    },
+                                                                                    Specular = new SpecularChannelContainer {
+                                                                                        Color = new float3(1, 1, 1), Shininess = 5 }
+                                                                                    }
+                                                                            },
+                                                                            SimpleMeshes.CreateCuboid(new float3(1, 5, 2))
+                                                                    },
+                                                                }
+                                                            }
+                                                            }
+                                                }
                                             }
                                         }
                                     }
                                 }
-                            },
+                            }
                         }
                     }
-                }
-            };
-        }
-
+                };
+            }
+            
         // Init is called on startup. 
         public override void Init()
         {
@@ -171,8 +273,37 @@ namespace Fusee.Tutorial.Core
         public override void RenderAFrame()
         {
             float bodyRot = _bodyTransform.Rotation.y;
-            bodyRot += 0.1f * Keyboard.LeftRightAxis;
+            bodyRot += 0.7f * Keyboard.LeftRightAxis*DeltaTime;
             _bodyTransform.Rotation = new float3(0, bodyRot, 0);
+
+            float upperArm = _upperArmTransform.Rotation.x;
+            upperArm += 0.7f * Keyboard.UpDownAxis*DeltaTime;
+            _upperArmTransform.Rotation = new float3(upperArm, 0, 0);
+
+            float foreArm = _foreArmTransform.Rotation.x;
+            foreArm += 0.7f * Keyboard.WSAxis*DeltaTime;
+            _foreArmTransform.Rotation = new float3(foreArm, 0, 0);
+
+            float Greifhand3 = _greifhand3Transform.Translation.x;
+            float Greifhand2 = _greifhand2Transform.Translation.x;
+            if(Greifhand3 > 0.5f && Keyboard.GetKey(KeyCodes.A)){
+                    Greifhand3 -= 0.1f;
+                    Greifhand2 += 0.1f;
+                    _greifhand3Transform.Translation = new float3(Greifhand3, -1, 0);
+                    _greifhand2Transform.Translation = new float3(Greifhand2, -1, 0);
+            }else  if(Greifhand3 < 4.5f && Keyboard.GetKey(KeyCodes.D)){
+                    Greifhand3 += 0.1f;
+                    Greifhand2 -= 0.1f;
+                    _greifhand3Transform.Translation = new float3(Greifhand3, -1, 0);
+                    _greifhand2Transform.Translation = new float3(Greifhand2, -1, 0);
+            }
+
+            //Kameraperspektive
+            if(Mouse.LeftButton == true)
+            {
+                _camAngle = _camAngle + 0.01f*(Mouse.Velocity.x) * DeltaTime;
+            }
+            
 
             // Clear the backbuffer
             RC.Clear(ClearFlags.Color | ClearFlags.Depth);
